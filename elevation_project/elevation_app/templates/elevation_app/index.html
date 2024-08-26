@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevation Profile Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Elevation Profile Generator</h1>
+        <form method="POST" enctype="multipart/form-data" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <label for="gpx_file" class="form-label">Upload GPX file:</label>
+                <input type="file" class="form-control" name="gpx_file" required>
+            </div>
+    
+            <div class="col-md-6">
+                <label for="aspect" class="form-label">Aspect Ratio:</label>
+                <input type="number" class="form-control" name="aspect" value="4" step="0.1">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="line_color" class="form-label">Line Color:</label>
+                <input type="color" class="form-control" name="line_color" value="#0000FF">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="fill_color" class="form-label">Fill Color:</label>
+                <input type="color" class="form-control" name="fill_color" value="#d4edfc">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="elements_color" class="form-label">Elements Color:</label>
+                <input type="color" class="form-control" name="elements_color" value="#004a80">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="smoothness" class="form-label">Smoothing:</label>
+                <input type="number" class="form-control" name="smoothness" value="5" min="1" max="21">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="y_min" class="form-label">Y Axis Min:</label>
+                <input type="number" class="form-control" name="y_min" value="500">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="y_max" class="form-label">Y Axis Max:</label>
+                <input type="number" class="form-control" name="y_max" value="1200">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="grid_style" class="form-label">Grid Style:</label>
+                <select name="grid_style" class="form-select">
+                    <option value="x">x</option>
+                    <option value="y">y</option>
+                    <option value="both">Both</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6">
+                <label for="line_style" class="form-label">Line Style:</label>
+                <select name="line_style" class="form-select">
+                    <option value="solid">Solid</option>
+                    <option value="dashed">Dashed</option>
+                    <option value="dotted">Dotted</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6">
+                <label for="line_width" class="form-label">Line Width:</label>
+                <input type="number" class="form-control" name="line_width" value="3" min="1">
+            </div>
+    
+            <div class="col-md-6 form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="hide_box" id="hide_box" checked>
+                <label class="form-check-label" for="hide_box">Hide Box</label>
+            </div>
+    
+            <div class="col-md-6 form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="hide_grid" id="hide_grid">
+                <label class="form-check-label" for="hide_grid">Hide Grid</label>
+            </div>
+    
+            <div class="col-md-6 form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="hide_labels" id="hide_labels">
+                <label class="form-check-label" for="hide_labels">Hide Labels</label>
+            </div>
+    
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Generate Graph</button>
+                
+            </div>
+            
+            
+        </form>
+
+        {% if graph %}
+            <h5>Download as SVG:</h5>
+            <a href="/media/{{ svg_file_name }}" download="{{ svg_file_name }}">
+                <button class="btn btn-secondary">Download SVG</button>
+            </a>    
+            <br>
+            <br>
+            <h2>Generated Elevation Profile:</h2>
+            <img src="data:image/png;base64,{{ graph }}" alt="Elevation Profile" style="max-width : 75vw;">
+
+
+
+            <!-- <h3>Download as PDF:</h3>
+            <a href="/media/{{ pdf_file_name }}" download="{{ pdf_file_name }}">
+                <button>Download PDF</button>
+            </a> -->
+        {% endif %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
