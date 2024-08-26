@@ -98,8 +98,11 @@
             
             
         </form>
+        <br>
+        <br>
 
         {% if graph %}
+        <div class="text-center">
             <h5>Download as SVG:</h5>
             <a href="/media/{{ svg_file_name }}" download="{{ svg_file_name }}">
                 <button class="btn btn-secondary">Download SVG</button>
@@ -108,7 +111,7 @@
             <br>
             <h2>Generated Elevation Profile:</h2>
             <img src="data:image/png;base64,{{ graph }}" alt="Elevation Profile" style="max-width : 75vw;">
-
+        </div>
 
 
             <!-- <h3>Download as PDF:</h3>
