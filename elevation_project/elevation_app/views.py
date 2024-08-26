@@ -456,7 +456,7 @@ def plot_elevation_profile(request):
             # Ensure the 'media' directory exists
             media_dir = 'media'
             if not os.path.exists(media_dir):
-                os.makedirs(media_dir)
+                os.makedirs(media_dir) 
 
             with open(os.path.join(media_dir, svg_file_name), 'wb') as f:
                 f.write(svg_buffer.getvalue())
