@@ -326,6 +326,9 @@ def plot_elevation_profile(request):
         hide_box = request.POST.get('hide_box', False) == 'on'
         hide_grid = request.POST.get('hide_grid', False) == 'on'
         hide_labels = request.POST.get('hide_labels', False) == 'on'
+        font_color = request.POST.get('font_color', '#666666')
+        font_size = int(request.POST.get('font_size', 12))
+
 
         color_map = {
             "Blue": "#004a80",
@@ -374,8 +377,8 @@ def plot_elevation_profile(request):
             ax.set_xticks([])
             ax.set_yticks([])
         else:
-            ax.set_xlabel("Distance (km)")
-            ax.set_ylabel("")
+            ax.set_xlabel("Distance (km)", fontsize=12)
+            ax.set_ylabel("", fontsize=12)
             ax.tick_params(axis='both', which='major', labelsize=10)
 
         if hide_grid:
@@ -512,6 +515,6 @@ def plot_elevation_profile(request):
             f_pdf.write(pdf_buffer.getvalue())
         pdf_buffer.close()
 
-        return render(request, 'elevation_app/index.html', {'graph': graph, 'svg_file_name': svg_file_name})
+        return render(request, 'elevation_app/index.html', {'graph': graph, 'svg_file_name': svg_file_name, 'pdf_file_name': pdf_file_name})
 
     return render(request, 'elevation_app/index.html')
