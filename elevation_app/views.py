@@ -319,7 +319,7 @@ def plot_elevation_profile(request):
         elements_color = request.POST.get('elements_color', '#004a80')
         smoothness = int(request.POST.get('smoothness', 5))
         y_min = int(request.POST.get('y_min', 500))
-        y_max = int(request.POST.get('y_max', 1200))
+        y_max = int(request.POST.get('y_max', 2000))
         grid_style = request.POST.get('grid_style', 'x')
         line_style = request.POST.get('line_style', 'solid')
         line_width = int(request.POST.get('line_width', 3))
@@ -429,7 +429,7 @@ def plot_elevation_profile(request):
 
 
         y_max_plot = max(elevation_data) + 150 if max(elevation_data) > 1200 else 1200
-        ax.set_ylim(y_min, y_max_plot)
+        ax.set_ylim(y_min, y_max)
         ax.set_xlim(xmin, xmax)
         ax.tick_params(axis='both', labelcolor="black", length=0, width=0)
         ax.grid(color="#9d9d9c")
