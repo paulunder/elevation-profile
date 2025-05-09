@@ -313,9 +313,9 @@ def plot_elevation_profile(request):
         plt.rcParams['font.family'] = 'Helvetica'
 
         gpx_file = request.FILES.get('gpx_file')
-        aspect_ratio = float(request.POST.get('aspect', 4))
+        aspect_ratio = float(request.POST.get('aspect', 2.5))
         line_color = request.POST.get('line_color', 'Blue')
-        fill_color = request.POST.get('fill_color', '#d4edfc')
+        fill_color = request.POST.get('fill_color', '#E0EDD4')
         elements_color = request.POST.get('elements_color', '#004a80')
         smoothness = int(request.POST.get('smoothness', 5))
         y_min = int(request.POST.get('y_min', 500))
